@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import "./homepage.css";
+import "./homePage.css";
 // import { TypeAnimation } from "react-type-animation";
-import { useState } from "react";
+// import { useState } from "react";
 
 const Homepage = () => {
-  const [typingStatus, setTypingStatus] = useState("human1");
+  // const [typingStatus, setTypingStatus] = useState("human1");
 
   return (
     <div className="homepage">
@@ -25,7 +25,7 @@ const Homepage = () => {
           </div>
           <img src="/bot.png" alt="" className="bot" />
           <div className="chat">
-            <img
+            {/* <img
               src={
                 typingStatus === "human1"
                   ? "/human1.jpeg"
@@ -34,7 +34,7 @@ const Homepage = () => {
                   : "bot.png"
               }
               alt=""
-            />
+            /> */}
           </div>
         </div>
       </div>
