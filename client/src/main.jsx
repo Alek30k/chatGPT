@@ -4,6 +4,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Homepage from "./routes/homePage/HomePage";
 import DashboardPage from "./routes/dashboardPage/DashboardPage";
+import ChatPage from "./routes/chatPage/ChatPage";
 
 const router = createBrowserRouter([
   {
@@ -12,7 +13,10 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardPage />,
+    children: [
+      { path: "/dashboard", element: <DashboardPage /> },
+      { path: "/dashboard/chats/:id", element: <ChatPage /> },
+    ],
   },
 ]);
 
