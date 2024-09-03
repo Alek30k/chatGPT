@@ -1,11 +1,7 @@
 import { Link } from "react-router-dom";
 import "./homePage.css";
-// import { TypeAnimation } from "react-type-animation";
-// import { useState } from "react";
 
 const Homepage = () => {
-  // const [typingStatus, setTypingStatus] = useState("human1");
-
   return (
     <div className="homepage">
       <img src="/orbital.png" alt="" className="orbital" />
