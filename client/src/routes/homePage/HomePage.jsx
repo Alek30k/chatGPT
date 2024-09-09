@@ -57,19 +57,19 @@ const Homepage = () => {
                 2000,
                 () => {
                   setTypingStatus("human1");
-                },
-              ]}
-              wrapper="span"
-              repeat={Infinity}
-              cursor={true}
-              omitDeletionAnimation={true}
-            />
-          </div>
-        </div>
-      </div>
-      <div className="terms">
-        <img src="/logo.png" alt="" />
-        <div className="links">
+      //           },
+      //         ]}
+      //         wrapper="span"
+      //         repeat={Infinity}
+      //         cursor={true}
+      //         omitDeletionAnimation={true}
+      //       />
+      //     </div>
+      //   </div>
+      // </div>
+      // <div className="terms">
+      //   <img src="/logo.png" alt="" />
+      //   <div className="links">
           <Link to="/">Terms of Service</Link>
           <span>|</span>
           <Link to="/">Privacy Policy</Link>
