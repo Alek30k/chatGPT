@@ -23,6 +23,14 @@ const ChatList = () => {
         <Link to="/">My chat title</Link>
         <Link to="/">My chat title</Link>
       </div>
+      <hr />
+      <div className="upgrade">
+        <img src="/logo.png" alt="" />
+        <div className="texts">
+          <span>Upgrade to Ale AI Pro</span>
+          <span>Get unlimited access to all features</span>
+        </div>
+      </div>
     </div>
   );
 };
