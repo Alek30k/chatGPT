@@ -1,4 +1,5 @@
 import "./chatPage.css";
+import { useEffect, useRef } from "react";
 // import NewPrompt from "../../components/newPrompt/NewPrompt";
 // import { useQuery } from "@tanstack/react-query";
 // import { useLocation } from "react-router-dom";
@@ -18,6 +19,13 @@ const ChatPage = () => {
   // });
 
   // console.log(data);
+
+  const endRef = useRef(null);
+
+  useEffect(() => {
+    const element = endRef.current;
+    element.scrollIntoView({ behavior: "smooth" });
+  }, []);
 
   return (
     <div className="chatPage">
@@ -67,6 +75,7 @@ const ChatPage = () => {
           <div className="message user">message from user</div>
           <div className="message">message from ia</div>
           <div className="message user">message from user</div>
+          <div ref={endRef} />
         </div>
       </div>
     </div>
