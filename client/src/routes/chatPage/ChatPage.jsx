@@ -1,3 +1,4 @@
+import NewPrompt from "../../components/newPrompt/NewPrompt";
 import "./chatPage.css";
 import { useEffect, useRef } from "react";
 // import NewPrompt from "../../components/newPrompt/NewPrompt";
@@ -75,6 +76,7 @@ const ChatPage = () => {
           <div className="message user">message from user</div>
           <div className="message">message from ia</div>
           <div className="message user">message from user</div>
+          <NewPrompt />
           <div ref={endRef} />
         </div>
       </div>
