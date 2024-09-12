@@ -7,13 +7,17 @@
 
   .wrapper {
     flex: 1;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     width: 100%;
     display: flex;
     justify-content: center;
 
+    /* Ocultar scroll solo en navegadores basados en WebKit */
+
     .chat {
       width: 50%;
+      max-width: 600px;
       display: flex;
       flex-direction: column;
       gap: 20px;
@@ -34,5 +38,8 @@
         }
       }
     }
+  }
+  .wrapper::-webkit-scrollbar {
+    display: none;
   }
 }
