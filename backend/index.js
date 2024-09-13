@@ -6,6 +6,5 @@ const app = express();
 app.use(express.json());
 
 app.listen(port, () => {
-  connect();
   console.log("Server running on 3000");
 });
