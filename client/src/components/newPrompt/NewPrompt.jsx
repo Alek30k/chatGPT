@@ -1,7 +1,15 @@
+import Upload from "../upload/Upload";
 import "./newPrompt.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const NewPrompt = () => {
+  const [img, setImg] = useState({
+    isLoading: false,
+    error: "",
+    dbData: {},
+    aiData: {},
+  });
+
   const endRef = useRef(null);
 
   useEffect(() => {
@@ -15,7 +23,7 @@ const NewPrompt = () => {
       <div className="endChat" ref={endRef}></div>
       <div className="newPrompt">
         <form className="newForm">
-          {/* <Upload setImg={setImg} /> */}
+          <Upload setImg={setImg} />
           <label htmlFor="file">
             <img src="/attachment.png" alt="" />
           </label>
