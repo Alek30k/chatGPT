@@ -1,3 +1,4 @@
+import { IKImage } from "imagekitio-react";
 import Upload from "../upload/Upload";
 import "./newPrompt.css";
 import { useEffect, useRef, useState } from "react";
@@ -20,6 +21,15 @@ const NewPrompt = () => {
   return (
     <>
       ADD NEW CHAT
+      {img.isLoading && <div className="">Loading...</div>}
+      {img.dbData?.filePath && (
+        <IKImage
+          urlEndpoint={import.meta.env.VITE_IMAGE_KIT_ENDPOINT}
+          path={img.dbData?.filePath}
+          width="380"
+          transformation={[{ width: 380 }]}
+        />
+      )}
       <div className="endChat" ref={endRef}></div>
       <div className="newPrompt">
         <form className="newForm">
