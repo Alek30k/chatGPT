@@ -19,7 +19,7 @@ const NewPrompt = () => {
 
   return (
     <>
-      {/* ADD NEW CHAT
+      ADD NEW CHAT
       <div className="endChat" ref={endRef}></div>
       <div className="newPrompt">
         <form className="newForm">
@@ -31,7 +31,7 @@ const NewPrompt = () => {
             <img src="/arrow.png" alt="" />
           </button>
         </form>
-      </div> */}
+      </div>
     </>
   );
 };
