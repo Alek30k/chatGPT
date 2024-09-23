@@ -3,6 +3,7 @@ import Upload from "../upload/Upload";
 import "./newPrompt.css";
 import { useEffect, useRef, useState } from "react";
 import model from "../../lib/gemini";
+import Markdown from "react-markdown";
 
 const NewPrompt = () => {
   const [question, setQuestion] = useState("");
@@ -32,12 +33,12 @@ const NewPrompt = () => {
   useEffect(() => {
     const element = endRef.current;
     element.scrollIntoView({ behavior: "smooth" });
-  }, []);
+  }, [question, answer, img.dbData]);
 
   const add = async (text) => {
     setQuestion(text);
 
-    const result = await model.generateContent(prompt);
+    const result = await model.generateContent(text);
     const response = await result.response;
     setAnswer(response.text());
   };
@@ -64,7 +65,11 @@ const NewPrompt = () => {
         />
       )}
       {question && <div className="message user">{question}</div>}
-      {answer && <div className="message">{answer}</div>}
+      {answer && (
+        <div className="message">
+          <Markdown>{answer}</Markdown>
+        </div>
+      )}{" "}
       <div className="endChat" ref={endRef}></div>
       <div className="newPrompt">
         <form className="newForm" onSubmit={handleSubmit}>
