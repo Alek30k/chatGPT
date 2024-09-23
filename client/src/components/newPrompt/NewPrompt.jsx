@@ -2,8 +2,12 @@ import { IKImage } from "imagekitio-react";
 import Upload from "../upload/Upload";
 import "./newPrompt.css";
 import { useEffect, useRef, useState } from "react";
+import model from "../../lib/gemini";
 
 const NewPrompt = () => {
+  const [question, setQuestion] = useState("");
+  const [answer, setAnswer] = useState("");
+
   const [img, setImg] = useState({
     isLoading: false,
     error: "",
@@ -23,33 +27,29 @@ const NewPrompt = () => {
   //   },
   // });
 
-  const add = async (text, isInitial) => {
-    if (!isInitial) setQuestion(text);
-
-    try {
-      const result = await chat.sendMessageStream(
-        Object.entries(img.aiData).length ? [img.aiData, text] : [text]
-      );
-      let accumulatedText = "";
-      for await (const chunk of result.stream) {
-        const chunkText = chunk.text();
-        console.log(chunkText);
-        accumulatedText += chunkText;
-        setAnswer(accumulatedText);
-      }
-
-      mutation.mutate();
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const endRef = useRef(null);
 
   useEffect(() => {
     const element = endRef.current;
     element.scrollIntoView({ behavior: "smooth" });
   }, []);
+
+  const add = async (text) => {
+    setQuestion(text);
+
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    setAnswer(response.text());
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const text = e.target.text.value;
+    if (!text) return;
+
+    add(text);
+  };
 
   return (
     <>
@@ -63,9 +63,11 @@ const NewPrompt = () => {
           transformation={[{ width: 380 }]}
         />
       )}
+      {question && <div className="message user">{question}</div>}
+      {answer && <div className="message">{answer}</div>}
       <div className="endChat" ref={endRef}></div>
       <div className="newPrompt">
-        <form className="newForm">
+        <form className="newForm" onSubmit={handleSubmit}>
           <Upload setImg={setImg} />
 
           <input id="file" type="file" hidden />
