@@ -43,6 +43,7 @@ const NewPrompt = () => {
     );
     const response = await result.response;
     setAnswer(response.text());
+    setImg({ isLoading: false, error: "", dbData: {}, aiData: {} });
   };
 
   const handleSubmit = async (e) => {
