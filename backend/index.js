@@ -2,6 +2,7 @@ import express from "express";
 import ImageKit from "imagekit";
 import cors from "cors";
 import mongoose from "mongoose";
+import Chat from "./models/chat.js";
 
 const port = process.env.PORT || 3000;
 const app = express();
@@ -36,10 +37,18 @@ app.get("/api/upload", (req, res) => {
 });
 
 app.post("/api/chats", async (req, res) => {
-  // const userId = req.auth.userId;
+  const userId = req.auth.userId;
   const { text } = req.body;
 
-  console.log(text);
+  try {
+    const newChat = new Chat({
+      userId: userId,
+      history: [{ role: "user", parts: [{ text }] }],
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Error creating chat!");
+  }
 
   // try {
   //   // CREATE A NEW CHAT
@@ -84,7 +93,6 @@ app.post("/api/chats", async (req, res) => {
   //   }
   // } catch (err) {
   //   console.log(err);
-  //   res.status(500).send("Error creating chat!");
   // }
 });
 
