@@ -38,7 +38,8 @@ app.get("/api/upload", (req, res) => {
   res.send(result);
 });
 
-app.post("/api/test", ClerkExpressRequireAuth(), async (req, res) => {
+app.get("/api/test", ClerkExpressRequireAuth(), async (req, res) => {
+  console.log("Success!!!!");
   res.send("Success!");
 });
 
