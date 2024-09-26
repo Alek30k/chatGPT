@@ -38,6 +38,10 @@ app.get("/api/upload", (req, res) => {
   res.send(result);
 });
 
+app.post("/api/test", ClerkExpressRequireAuth(), async (req, res) => {
+  res.send("Success!");
+});
+
 app.post("/api/chats", ClerkExpressRequireAuth(), async (req, res) => {
   // const userId = req.auth.userId;
   const { userId, text } = req.body;
@@ -87,6 +91,11 @@ app.post("/api/chats", ClerkExpressRequireAuth(), async (req, res) => {
     console.log(error);
     res.status(500).send("Error creating chat!");
   }
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(401).send("Unauthenticated!");
 });
 
 app.listen(port, () => {
