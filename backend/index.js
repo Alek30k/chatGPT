@@ -38,10 +38,11 @@ app.get("/api/upload", (req, res) => {
   res.send(result);
 });
 
-app.get("/api/test", ClerkExpressRequireAuth(), async (req, res) => {
-  console.log("Success!!!!");
-  res.send("Success!");
-});
+// app.get("/api/test", ClerkExpressRequireAuth(), async (req, res) => {
+//   const userId = req.auth.userId;
+//   console.log(userId);
+//   res.send("Success!");
+// });
 
 app.post("/api/chats", ClerkExpressRequireAuth(), async (req, res) => {
   // const userId = req.auth.userId;
