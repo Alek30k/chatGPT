@@ -45,8 +45,9 @@ app.get("/api/upload", (req, res) => {
 // });
 
 app.post("/api/chats", ClerkExpressRequireAuth(), async (req, res) => {
-  // const userId = req.auth.userId;
-  const { userId, text } = req.body;
+  const userId = req.auth.userId;
+
+  const { text } = req.body;
 
   try {
     //CREATE A NEW CHAT
