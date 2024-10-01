@@ -51,10 +51,10 @@ app.post("/api/chats", ClerkExpressRequireAuth(), async (req, res) => {
 
   try {
     //CREATE A NEW CHAT
-    const newChat = new Chat({
-      userId: userId,
-      history: [{ role: "user", parts: [{ text }] }],
-    });
+    // const newChat = new Chat({
+    //   userId: userId,
+    //   history: [{ role: "user", parts: [{ text }] }],
+    // });
 
     const savedChat = await newChat.save();
 
