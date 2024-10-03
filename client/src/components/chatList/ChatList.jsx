@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "./chatList.css";
+import { useQuery } from "@tanstack/react-query";
 
 const ChatList = () => {
   const { isPending, error, data } = useQuery({
@@ -17,7 +18,7 @@ const ChatList = () => {
       <Link to="/">Explore Ale AI</Link>
       <Link to="/">Contact</Link>
       <hr />
-      <span className="title">RECENT CHATS</span>ChatList
+      <span className="title">RECENT CHATS</span>
       <div className="list">
         {isPending
           ? "Loading..."
