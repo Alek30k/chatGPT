@@ -3,6 +3,7 @@ import NewPrompt from "../../components/newPrompt/NewPrompt";
 import "./chatPage.css";
 import { useQuery } from "@tanstack/react-query";
 import Markdown from "react-markdown";
+import { IKImage } from "imagekitio-react";
 
 const ChatPage = () => {
   const path = useLocation().pathname;
@@ -16,7 +17,7 @@ const ChatPage = () => {
       }).then((res) => res.json()),
   });
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className="chatPage">
