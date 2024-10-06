@@ -4,7 +4,7 @@ import "./newPrompt.css";
 import { useEffect, useRef, useState } from "react";
 import model from "../../lib/gemini";
 import Markdown from "react-markdown";
-import { useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const NewPrompt = ({ data }) => {
   const [question, setQuestion] = useState("");
@@ -19,18 +19,10 @@ const NewPrompt = ({ data }) => {
 
   const chat = model.startChat({
     history: [
-      // data?.history.map(({ role, parts }) => ({
-      //   role,
-      //   parts: [{ text: parts[0].text }],
-      // })),
-      {
-        role: "user",
-        parts: [{ text: "Hello, I have 2 dogs in my house." }],
-      },
-      {
-        role: "model",
-        parts: [{ text: "Great to meet you, what would you like to know?" }],
-      },
+      data?.history.map(({ role, parts }) => ({
+        role,
+        parts: [{ text: parts[0].text }],
+      })),
     ],
     generationConfig: {
       // maxOutputTokens: 100,
@@ -38,11 +30,12 @@ const NewPrompt = ({ data }) => {
   });
 
   const endRef = useRef(null);
+  const formRef = useRef(null);
 
   useEffect(() => {
     const element = endRef.current;
     element.scrollIntoView({ behavior: "smooth" });
-  }, [question, answer, img.dbData]);
+  }, [data, question, answer, img.dbData]);
 
   const queryClient = useQueryClient();
 
@@ -108,8 +101,20 @@ const NewPrompt = ({ data }) => {
     const text = e.target.text.value;
     if (!text) return;
 
-    add(text);
+    add(text, false);
   };
+
+  // IN PRODUCTION WE DON'T NEED IT
+  const hasRun = useRef(false);
+
+  useEffect(() => {
+    if (!hasRun.current) {
+      if (data?.history?.length === 1) {
+        add(data.history[0].parts[0].text, true);
+      }
+    }
+    hasRun.current = true;
+  }, []);
 
   return (
     <>
@@ -130,7 +135,7 @@ const NewPrompt = ({ data }) => {
       )}{" "}
       <div className="endChat" ref={endRef}></div>
       <div className="newPrompt">
-        <form className="newForm" onSubmit={handleSubmit}>
+        <form className="newForm" onSubmit={handleSubmit} ref={formRef}>
           <Upload setImg={setImg} />
 
           <input id="file" type="file" hidden />
