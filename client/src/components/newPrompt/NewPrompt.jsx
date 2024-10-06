@@ -71,7 +71,6 @@ const NewPrompt = () => {
 
   return (
     <>
-      ADD NEW CHAT
       {img.isLoading && <div className="">Loading...</div>}
       {img.dbData?.filePath && (
         <IKImage
