@@ -31,7 +31,6 @@ const ChatList = () => {
             ))}
       </div>
       <hr />
-      //UPGRADE
       <div className="upgrade">
         <img src="/logo.png" alt="" />
         <div className="texts">
