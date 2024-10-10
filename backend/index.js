@@ -152,7 +152,7 @@ app.put("/api/chats/:id", ClerkExpressRequireAuth(), async (req, res) => {
 
 // app.use((err, req, res, next) => {
 //   console.error(err.stack);
-//   res.status(401).send("Unauthenticated!");
+//   res.status(401).send("Unauthenticated!!");
 // });
 
 // PRODUCTION
