@@ -26,7 +26,7 @@ const ChatPage = () => {
           {isPending
             ? "Loading..."
             : error
-            ? "Something went wrong!"
+            ? (console.log(error), "Something went wrong!")
             : data?.history?.map((message, i) => (
                 <>
                   {message.img && (
