@@ -6,10 +6,8 @@ const ChatList = () => {
   const { isPending, error, data } = useQuery({
     queryKey: ["userChats"],
     queryFn: () =>
-      // fetch(`${import.meta.env.VITE_API_URL}/api/userchats`, {
-
       fetch("https://aleia.onrender.com/api/userchats", {
-        // credentials: "include",
+        credentials: "include",
       }).then((res) => res.json()),
   });
 
