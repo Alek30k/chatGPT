@@ -16,8 +16,8 @@ const __dirname = path.dirname(__filename);
 
 app.use(
   cors({
-    origin: "https://chat-gpt-kohl-psi.vercel.app",
-    // credentials: true,
+    origin: process.env.CLIENT_URL,
+    credentials: true,
   })
 );
 
