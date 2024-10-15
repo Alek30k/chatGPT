@@ -16,8 +16,9 @@ const app = express();
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: "https://chat-gpt-kohl-psi.vercel.app",
     credentials: true,
+    methods: ["GET", "POST"], // Métodos permitidos
   })
 );
 
