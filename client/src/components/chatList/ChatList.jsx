@@ -8,7 +8,15 @@ const ChatList = () => {
     queryFn: () =>
       fetch("https://aleia.onrender.com/api/userchats", {
         credentials: "include",
-      }).then((res) => res.json()),
+      }).then((res) => {
+        if (!res.ok) {
+          // Si la respuesta no es exitosa (código 200-299), lanzamos un error
+          return res.text().then((text) => {
+            throw new Error(text || "Error desconocido");
+          });
+        }
+        return res.json(); // Si es exitosa, parseamos a JSON
+      }),
   });
 
   return (
