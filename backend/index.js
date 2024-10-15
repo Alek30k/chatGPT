@@ -8,7 +8,7 @@ import Chat from "./models/chat.js";
 import UserChats from "./models/userChats.js";
 import { ClerkExpressRequireAuth } from "@clerk/clerk-sdk-node";
 
-const port = process.env.VITE_API_URL || 3000;
+const port = process.env.VITE_API_URL;
 const app = express();
 
 // const __filename = fileURLToPath(import.meta.url);
@@ -16,6 +16,7 @@ const app = express();
 
 app.use(
   cors({
+    origin: process.env.CLIENT_URL,
     credentials: true,
   })
 );
