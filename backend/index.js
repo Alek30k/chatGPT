@@ -159,7 +159,7 @@ app.use((err, req, res, next) => {
   res.status(401).send("Unauthenticated!");
 });
 
-// PRODUCTION
+// PRODUCTION CODE
 // app.use(express.static(path.join(__dirname, "./client")));
 
 // app.get("*", (req, res) => {
