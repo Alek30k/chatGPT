@@ -8,7 +8,7 @@ import Chat from "./models/chat.js";
 import UserChats from "./models/userChats.js";
 import { ClerkExpressRequireAuth } from "@clerk/clerk-sdk-node";
 
-const port = process.env.VITE_API_URL;
+const port = process.env.PORT || 3000;
 const app = express();
 
 // const __filename = fileURLToPath(import.meta.url);
@@ -94,7 +94,7 @@ app.post("/api/chats", ClerkExpressRequireAuth(), async (req, res) => {
   }
 });
 
-app.get("/api/userchats", async (req, res) => {
+app.get("/api/userchats", ClerkExpressRequireAuth(), async (req, res) => {
   const userId = req.auth.userId;
 
   console.log(userId);
@@ -159,7 +159,7 @@ app.use((err, req, res, next) => {
   res.status(401).send("Unauthenticated!");
 });
 
-// PRODUCTION CODE
+// PRODUCTION
 // app.use(express.static(path.join(__dirname, "./client")));
 
 // app.get("*", (req, res) => {
