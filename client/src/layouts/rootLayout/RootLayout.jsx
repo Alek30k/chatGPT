@@ -1,8 +1,7 @@
 import { Link, Outlet } from "react-router-dom";
-import "./rooLayout.css";
+import "./rootLayout.css";
 import { ClerkProvider, SignedIn, UserButton } from "@clerk/clerk-react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 if (!PUBLISHABLE_KEY) {
@@ -18,13 +17,10 @@ const RootLayout = () => {
         <div className="rootLayout">
           <header>
             <Link to="/" className="logo">
-              <img src="/logo.png" alt="logo" />
-              <span>ALE IA</span>
+              <img src="/logo.png" alt="" />
+              <span>ALE AI</span>
             </Link>
             <div className="user">
-              {/* <SignedOut>
-              <SignInButton />
-            </SignedOut> */}
               <SignedIn>
                 <UserButton />
               </SignedIn>
