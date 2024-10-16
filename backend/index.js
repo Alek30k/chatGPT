@@ -103,7 +103,10 @@ app.get("/api/userchats", ClerkExpressRequireAuth(), async (req, res) => {
   try {
     const userChats = await UserChats.find({ userId });
 
-    if (!userChats.length) return res.status(404).send("User chats not found!");
+    // Si no hay chats, devolver un array vacío en lugar de un error
+    if (!userChats.length) {
+      return res.status(200).json([]); // Devolver una lista vacía
+    }
 
     res.status(200).send(userChats[0].chats);
   } catch (err) {
