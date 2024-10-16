@@ -31,6 +31,8 @@ const ChatList = () => {
     },
   });
 
+  console.log(data);
+
   return (
     <div className="chatList">
       <span className="title">DASHBOARD</span>
