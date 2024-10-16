@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import "./chatList.css";
 import { useQuery } from "@tanstack/react-query";
-import { useAuth } from "@clerk/clerk-react"; // Asegúrate de que está importado correctamente
+import { useAuth } from "@clerk/clerk-react";
 
 const ChatList = () => {
-  const { isSignedIn, getToken } = useAuth(); // Extrae isSignedIn y getToken
+  const { isSignedIn, getToken } = useAuth();
 
   if (!isSignedIn) {
     return <div>No estás autenticado. Por favor, inicia sesión.</div>;
@@ -13,12 +13,12 @@ const ChatList = () => {
   const { isPending, error, data } = useQuery({
     queryKey: ["userChats"],
     queryFn: async () => {
-      const token = await getToken(); // Obtén el token de Clerk
+      const token = await getToken();
 
       return fetch("https://aleia.onrender.com/api/userchats", {
         credentials: "include",
         headers: {
-          Authorization: `Bearer ${token}`, // Envía el token en los headers
+          Authorization: `Bearer ${token}`,
         },
       }).then((res) => {
         if (!res.ok) {
@@ -26,7 +26,7 @@ const ChatList = () => {
             throw new Error(text || "Error desconocido");
           });
         }
-        return res.json(); // Parsear la respuesta si es exitosa
+        return res.json();
       });
     },
   });
@@ -43,12 +43,14 @@ const ChatList = () => {
         {isPending
           ? "Loading..."
           : error
-          ? (console.log("Error >>>>>", error), "Something went wrong!")
-          : data?.map((chat) => (
+          ? (console.log("Error >>>>>", error), "No chats found!")
+          : data?.length > 0
+          ? data.map((chat) => (
               <Link to={`/dashboard/chats/${chat._id}`} key={chat._id}>
                 {chat.title}
               </Link>
-            ))}
+            ))
+          : "No chats available!"}
       </div>
       <hr />
       <div className="upgrade">
