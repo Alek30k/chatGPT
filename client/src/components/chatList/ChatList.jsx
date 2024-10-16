@@ -1,27 +1,34 @@
 import { Link } from "react-router-dom";
 import "./chatList.css";
 import { useQuery } from "@tanstack/react-query";
+import { useAuth } from "@clerk/clerk-react"; // Asegúrate de que está importado correctamente
 
 const ChatList = () => {
+  const { isSignedIn, getToken } = useAuth(); // Extrae isSignedIn y getToken
+
+  if (!isSignedIn) {
+    return <div>No estás autenticado. Por favor, inicia sesión.</div>;
+  }
+
   const { isPending, error, data } = useQuery({
     queryKey: ["userChats"],
-    queryFn: () =>
-      getToken() // Obtiene el token de Clerk
-        .then((token) =>
-          fetch("https://aleia.onrender.com/api/userchats", {
-            credentials: "include",
-            headers: {
-              Authorization: `Bearer ${token}`, // Envía el token en el header
-            },
-          }).then((res) => {
-            if (!res.ok) {
-              return res.text().then((text) => {
-                throw new Error(text || "Error desconocido");
-              });
-            }
-            return res.json();
-          })
-        ),
+    queryFn: async () => {
+      const token = await getToken(); // Obtén el token de Clerk
+
+      return fetch("https://aleia.onrender.com/api/userchats", {
+        credentials: "include",
+        headers: {
+          Authorization: `Bearer ${token}`, // Envía el token en los headers
+        },
+      }).then((res) => {
+        if (!res.ok) {
+          return res.text().then((text) => {
+            throw new Error(text || "Error desconocido");
+          });
+        }
+        return res.json(); // Parsear la respuesta si es exitosa
+      });
+    },
   });
 
   return (
@@ -36,7 +43,7 @@ const ChatList = () => {
         {isPending
           ? "Loading..."
           : error
-          ? (console.log(">>>>>", error), "Something went wrong!")
+          ? (console.log("Error >>>>>", error), "Something went wrong!")
           : data?.map((chat) => (
               <Link to={`/dashboard/chats/${chat._id}`} key={chat._id}>
                 {chat.title}
