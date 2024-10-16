@@ -96,7 +96,9 @@ app.post("/api/chats", ClerkExpressRequireAuth(), async (req, res) => {
 });
 
 app.get("/api/userchats", ClerkExpressRequireAuth(), async (req, res) => {
-  const userId = req.auth.userId;
+  console.log("req.auth:", req.auth); // Verifica si hay datos en req.auth
+
+  const userId = req.auth?.userId;
 
   console.log(">>>>>", userId);
 
