@@ -10,7 +10,13 @@ import { ClerkExpressRequireAuth } from "@clerk/clerk-sdk-node";
 const port = process.env.PORT || 3000;
 const app = express();
 
-db.UserChats.find({ userId: "user_2nS6tTeIrbVVtEkNelwPmtocr7O" });
+const db = mongoose.connection;
+
+db.on("open", () => {
+  console.log("MongoDB connected");
+  // Luego de conectar, puedes hacer consultas o cualquier otra operación
+  // db.UserChats.find({ userId: "user_2nS6tTeIrbVVtEkNelwPmtocr7O" });
+});
 
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
