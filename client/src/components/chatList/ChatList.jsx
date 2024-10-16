@@ -31,9 +31,14 @@ const ChatList = () => {
         })
         .then((data) => {
           console.log("Chats:", data);
+          if (!data) {
+            throw new Error("No data received from the server");
+          }
+          return data;
         })
         .catch((err) => {
           console.log("Error:", err);
+          throw err;
         });
     },
   });
