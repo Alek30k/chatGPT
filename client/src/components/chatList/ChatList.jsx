@@ -20,14 +20,21 @@ const ChatList = () => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }).then((res) => {
-        if (!res.ok) {
-          return res.text().then((text) => {
-            throw new Error(text || "Error desconocido");
-          });
-        }
-        return res.json();
-      });
+      })
+        .then((res) => {
+          if (!res.ok) {
+            return res.text().then((text) => {
+              throw new Error(text || "Error desconocido");
+            });
+          }
+          return res.json();
+        })
+        .then((data) => {
+          console.log("Chats:", data);
+        })
+        .catch((err) => {
+          console.log("Error:", err);
+        });
     },
   });
 
