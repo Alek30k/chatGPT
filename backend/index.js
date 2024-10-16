@@ -98,7 +98,7 @@ app.post("/api/chats", ClerkExpressRequireAuth(), async (req, res) => {
 app.get("/api/userchats", ClerkExpressRequireAuth(), async (req, res) => {
   const userId = req.auth.userId;
 
-  console.log(userId);
+  console.log(">>>>>", userId);
 
   try {
     const userChats = await UserChats.find({ userId });
@@ -107,7 +107,7 @@ app.get("/api/userchats", ClerkExpressRequireAuth(), async (req, res) => {
 
     // Si no hay chats, devolver un array vacío en lugar de un error
     if (!userChats.length) {
-      return res.status(200).json(["Ops"]); // Devolver una lista vacía
+      return res.status(200).json([]); // Devolver una lista vacía
     }
 
     res.status(200).send(userChats[0].chats);
