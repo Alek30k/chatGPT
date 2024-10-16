@@ -6,7 +6,7 @@ import ImageKit from "imagekit";
 import mongoose from "mongoose";
 import Chat from "./models/chat.js";
 import UserChats from "./models/userChats.js";
-import { ClerkExpressRequireAuth } from "@clerk/clerk-sdk-node";
+const { ClerkExpressWithAuth } = require("@clerk/clerk-sdk-node");
 
 const port = process.env.PORT || 3000;
 const app = express();
@@ -19,6 +19,12 @@ app.use(
     origin: "https://chat-gpt-kohl-psi.vercel.app",
     credentials: true,
     methods: ["GET", "POST"], // Métodos permitidos
+  })
+);
+
+app.use(
+  ClerkExpressWithAuth({
+    apiKey: process.env.CLERK_PUBLISHABLE_KEY, // Asegúrate de tener la API key correcta
   })
 );
 
@@ -44,7 +50,7 @@ app.get("/api/upload", (req, res) => {
   res.send(result);
 });
 
-app.post("/api/chats", ClerkExpressRequireAuth(), async (req, res) => {
+app.post("/api/chats", ClerkExpressWithAuth(), async (req, res) => {
   const userId = req.auth.userId;
   const { text } = req.body;
 
@@ -95,7 +101,7 @@ app.post("/api/chats", ClerkExpressRequireAuth(), async (req, res) => {
   }
 });
 
-app.get("/api/userchats", ClerkExpressRequireAuth(), async (req, res) => {
+app.get("/api/userchats", ClerkExpressWithAuth(), async (req, res) => {
   console.log("req.auth:", req.auth); // Verifica si hay datos en req.auth
 
   const userId = req.auth?.userId;
@@ -119,7 +125,7 @@ app.get("/api/userchats", ClerkExpressRequireAuth(), async (req, res) => {
   }
 });
 
-app.get("/api/chats/:id", ClerkExpressRequireAuth(), async (req, res) => {
+app.get("/api/chats/:id", ClerkExpressWithAuth(), async (req, res) => {
   const userId = req.auth.userId;
 
   try {
@@ -132,7 +138,7 @@ app.get("/api/chats/:id", ClerkExpressRequireAuth(), async (req, res) => {
   }
 });
 
-app.put("/api/chats/:id", ClerkExpressRequireAuth(), async (req, res) => {
+app.put("/api/chats/:id", ClerkExpressWithAuth(), async (req, res) => {
   const userId = req.auth.userId;
 
   const { question, answer, img } = req.body;
