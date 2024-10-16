@@ -10,6 +10,11 @@ import { ClerkExpressRequireAuth } from "@clerk/clerk-sdk-node";
 const port = process.env.PORT || 3000;
 const app = express();
 
+db.UserChats.find({ userId: "user_2nS6tTeIrbVVtEkNelwPmtocr7O" });
+
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+
 app.use(
   cors({
     origin: "https://chat-gpt-kohl-psi.vercel.app",
