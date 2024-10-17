@@ -116,7 +116,7 @@ app.get("/api/userchats", ClerkExpressRequireAuth(), async (req, res) => {
 
     // Si no hay chats, devolver un array vacío en lugar de un error
     if (!userChats.length) {
-      return res.status(200).json([]); // Devolver una lista vacía
+      return res.status(200).json(["no existe userChats"]); // Devolver una lista vacía
     }
 
     res.status(200).send(userChats[0].chats);
