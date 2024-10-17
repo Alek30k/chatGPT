@@ -14,7 +14,6 @@ const ChatList = () => {
     queryKey: ["userChats"],
     queryFn: async () => {
       const token = await getToken();
-      console.log(token);
 
       return fetch("https://aleia.onrender.com/api/userchats", {
         credentials: "include",
@@ -28,6 +27,7 @@ const ChatList = () => {
               throw new Error(text || "Error desconocido");
             });
           }
+          console.log(res);
           return res.json();
         })
         .then((data) => {
