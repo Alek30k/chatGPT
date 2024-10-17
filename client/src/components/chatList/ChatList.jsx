@@ -27,7 +27,6 @@ const ChatList = () => {
               throw new Error(text || "Error desconocido");
             });
           }
-          console.log(res);
           return res.json();
         })
         .then((data) => {

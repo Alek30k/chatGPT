@@ -12,12 +12,12 @@ const ChatPage = () => {
   const { isPending, error, data } = useQuery({
     queryKey: ["chat", chatId],
     queryFn: () =>
-      fetch(`${import.meta.env.VITE_API_URL}/api/chats/${chatId}`, {
+      fetch(`https://aleia.onrender.com/api/chats/${chatId}`, {
         credentials: "include",
       }).then((res) => res.json()),
   });
 
-  // console.log(data);
+  console.log(data);
 
   return (
     <div className="chatPage">
@@ -26,7 +26,7 @@ const ChatPage = () => {
           {isPending
             ? "Loading..."
             : error
-            ? "Something went wrong!"
+            ? (console.log("Error >>>>>", error), "Something went wrong!")
             : data?.history?.map((message, i) => (
                 <>
                   {message.img && (
