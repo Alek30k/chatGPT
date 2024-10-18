@@ -7,6 +7,7 @@ import Markdown from "react-markdown";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const NewPrompt = ({ data }) => {
+  console.log("soy data de newPromt", data);
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
 

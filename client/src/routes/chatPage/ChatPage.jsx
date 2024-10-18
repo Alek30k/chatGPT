@@ -55,7 +55,6 @@ const ChatPage = () => {
                 </>
               ))}
           {data && <NewPrompt data={data} />}
-          "what????"
         </div>
       </div>
     </div>
