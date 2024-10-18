@@ -6,6 +6,7 @@ import Markdown from "react-markdown";
 import { IKImage } from "imagekitio-react";
 
 const ChatPage = () => {
+  console.log("epaaa");
   const path = useLocation().pathname;
   const chatId = path.split("/").pop();
 
@@ -14,6 +15,9 @@ const ChatPage = () => {
     queryFn: () =>
       fetch(`https://aleia.onrender.com/api/chats/${chatId}`, {
         credentials: "include",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }).then((res) => res.json()),
   });
 
@@ -51,6 +55,7 @@ const ChatPage = () => {
                 </>
               ))}
           {data && <NewPrompt data={data} />}
+          "what????"
         </div>
       </div>
     </div>
